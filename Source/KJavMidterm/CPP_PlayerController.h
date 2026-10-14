@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "Templates/SubclassOf.h"
 #include "GameFramework/PlayerController.h"
+#include "GameFramework/Actor.h"
 #include "InputActionValue.h"
 #include "CPP_PlayerController.generated.h"
 
@@ -22,13 +23,13 @@ class KJAVMIDTERM_API ACPP_PlayerController : public APlayerController
 	GENERATED_BODY()
 	
 	public: 
-	ACPP_PlayerController(); //this was causing compiler errors
+	ACPP_PlayerController(); 
 
 	public: 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	UPROPERTY(EditAnywhere, BlueprintReadOnly) //public variable, speed of movement
 	float Speed; 
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	UPROPERTY(EditAnywhere, BlueprintReadOnly) //public variable, speed of rotation
 	float Sensitivity; 
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category=Input, meta=(AllowPrivateAccess = "true"))
@@ -40,6 +41,9 @@ class KJAVMIDTERM_API ACPP_PlayerController : public APlayerController
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category=Input, meta=(AllowPrivateAccess = "true"))
 	class UInputAction* LookInput; 
 
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category=Input, meta=(AllowPrivateAccess = "true"))
+	class UInputAction* ShootInput; 
+
 
 	protected: 
 	virtual void SetupInputComponent() override; 
@@ -50,9 +54,13 @@ class KJAVMIDTERM_API ACPP_PlayerController : public APlayerController
 
 	void Look(const FInputActionValue& LookValue); 
 
+	void PlayerShoot();
+
 	UFUNCTION(BlueprintCallable)
 	void Move(const FInputActionValue& Value); //CONST FINPUTACTIONVALUE is needed, not FInputAction
 	
+	class ABaseCharacter* PlayerCharacter;
+
 	private: 
 
 

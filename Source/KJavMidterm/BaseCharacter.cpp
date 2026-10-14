@@ -2,6 +2,7 @@
 
 
 #include "BaseCharacter.h"
+#include "Components/SphereComponent.h"
 
 // Sets default values
 ABaseCharacter::ABaseCharacter()
@@ -32,8 +33,16 @@ void ABaseCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompo
 
 }
 
+void ABaseCharacter::GetHurt(int Damage)
+{
+	//get hurt
+
+}
+
 void ABaseCharacter::Shoot() 
 {
-	
+	//shooting 
+	GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, TEXT("Shoot!"));
+
 }
 
