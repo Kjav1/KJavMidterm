@@ -42,8 +42,6 @@ void ACPP_PlayerController::SetupInputComponent()
         
         EnhancedInputComponent->BindAction(ShootInput, ETriggerEvent::Started, this, &ACPP_PlayerController::PlayerShoot);
         
-        //NOTE: Video said to use TriggerEvent:Ongoing 
-        //That one does not work. For continuous data like walking or looking, use Triggered
     }
 
 }
@@ -55,7 +53,7 @@ void ACPP_PlayerController::PlayerShoot()
         PlayerCharacter->Shoot();
     }
 
-    //GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, TEXT("Shoot!"));	//handy dandy debug tool :)
+    //GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, TEXT("Shoot! 1"));	//handy dandy debug tool :)
 }
 
 void ACPP_PlayerController::Look(const FInputActionValue& LookValue) 

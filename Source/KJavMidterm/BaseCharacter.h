@@ -17,8 +17,13 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	TSubclassOf<class ABaseBullet> BulletClass; 
 
-	void Shoot(); //for player controller to access
+	UPROPERTY(VisibleAnywhere)
+	USceneComponent* SpawnLocation;
+
+	AActor* Shoot(); //for player controller to access
 
 	virtual void GetHurt(int Damage);  //no need to put override if this is the first instsance of a method (children will write 'override' but the parent will not)
 
