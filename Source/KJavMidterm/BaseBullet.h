@@ -24,7 +24,7 @@ public:
 	class UProjectileMovementComponent* ProjectileMovement; 
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	float BulletSpeed = 5.0f; 
+	float BulletSpeed = 2500.0f; 
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	float DespawnTimer = 5.0f; 
