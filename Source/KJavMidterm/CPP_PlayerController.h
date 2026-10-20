@@ -58,7 +58,9 @@ class KJAVMIDTERM_API ACPP_PlayerController : public APlayerController
 
 	UFUNCTION(BlueprintCallable)
 	void Move(const FInputActionValue& Value); //CONST FINPUTACTIONVALUE is needed, not FInputAction
-	
+
+	class UWBP_HUD* UserInterface;
+
 	class ABaseCharacter* PlayerCharacter;
 
 	private: 
