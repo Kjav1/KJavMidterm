@@ -8,7 +8,6 @@
 ACPP_PlayerController::ACPP_PlayerController()
 {
     PrimaryActorTick.bCanEverTick = true; 
-
 }
 
 void ACPP_PlayerController::Tick(float DeltaTime) 
@@ -40,7 +39,7 @@ void ACPP_PlayerController::SetupInputComponent()
 
         EnhancedInputComponent->BindAction(LookInput, ETriggerEvent::Triggered, this, &ACPP_PlayerController::Look);
         
-        EnhancedInputComponent->BindAction(ShootInput, ETriggerEvent::Started, this, &ACPP_PlayerController::PlayerShoot);
+        EnhancedInputComponent->BindAction(ShootInput, ETriggerEvent::Triggered, this, &ACPP_PlayerController::PlayerShoot);
         
     }
 
@@ -48,12 +47,12 @@ void ACPP_PlayerController::SetupInputComponent()
 
 void ACPP_PlayerController::PlayerShoot() 
 {
+    //GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, TEXT("Shoot!"));	//handy dandy debug tool :)
+
     if (PlayerCharacter) //if script exists, then use it to shoot
     {
         PlayerCharacter->Shoot();
     }
-
-    //GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, TEXT("Shoot! 1"));	//handy dandy debug tool :)
 }
 
 void ACPP_PlayerController::Look(const FInputActionValue& LookValue) 

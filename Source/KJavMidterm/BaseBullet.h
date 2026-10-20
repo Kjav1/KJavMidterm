@@ -20,6 +20,24 @@ public:
 
 	class UStaticMeshComponent* SphereMesh;
 
+	UPROPERTY(EditAnywhere)
+	class UProjectileMovementComponent* ProjectileMovement; 
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	float BulletSpeed = 5.0f; 
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	float DespawnTimer = 5.0f; 
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	int BulletDamage = 1;
+
+
+	UFUNCTION()
+	void OnComponentHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit);
+
+	class ABaseCharacter* HitCharacter; 
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
@@ -27,5 +45,7 @@ protected:
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
+
+	void DestroyBullet(); 
 
 };

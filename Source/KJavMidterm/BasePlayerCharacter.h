@@ -25,7 +25,9 @@ public:
 	class USpringArmComponent* CameraBoom; 
 
 	UPROPERTY(EditAnywhere)
-	float speed = 5.0f;
+	float speed;
+
+	virtual void GetHurt(int Damage);
 
 	virtual void Tick(float DeltaTime) override;
 
