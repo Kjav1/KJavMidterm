@@ -25,6 +25,8 @@ void ABaseCharacter::BeginPlay()
 {
 	Super::BeginPlay();
 	
+	CanShoot = true;
+
 }
 
 // Called every frame
@@ -47,28 +49,43 @@ void ABaseCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompo
 void ABaseCharacter::GetHurt(int Damage)
 {
 	//get hurt
-
+	Health -= Damage; 
 }
 
-AActor* ABaseCharacter::Shoot() 
+void ABaseCharacter::Shoot() 
 {
-	//shooting 
-	FActorSpawnParameters SpawnParams; 
-	SpawnParams.Instigator = this; //who made this actor, useful for tracking bullets / points
+	//move shooting conditions to over here!
 
-	AActor* SpawnedBullet = GetWorld()->SpawnActor<ABaseBullet>(
-		BulletClass, 
-		SpawnLocation->GetComponentLocation(), 
-		GetActorRotation(),
-		SpawnParams
-	);
+	if (CanShoot) 
+	{
 
-	// if (SpawnedBullet) //used this to troubleshoot when actors weren't showing up in outline - Setting needed to be changed to 'update in PIE' to be visible
-	// {
-	// 	UE_LOG(LogTemp, Warning, TEXT("Hello World"));
-	// }
+		//shooting 
+		FActorSpawnParameters SpawnParams; 
+		SpawnParams.Instigator = this; //who made this actor, useful for tracking bullets / points
 
-	GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, TEXT("Shoot!"));
-	return SpawnedBullet; 
+		AActor* SpawnedBullet = GetWorld()->SpawnActor<ABaseBullet>(
+			BulletClass, 
+			SpawnLocation->GetComponentLocation(), 
+			GetActorRotation(),
+			SpawnParams
+		);
+
+		// if (SpawnedBullet) //used this to troubleshoot when actors weren't showing up in outline - Setting needed to be changed to 'update in PIE' to be visible
+		// {
+		// 	UE_LOG(LogTemp, Warning, TEXT("Hello World"));
+		// }
+
+		//GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, TEXT("Shoot!"));
+
+
+		CanShoot = false; 
+
+		FTimerHandle ShootCooldown; 
+        GetWorld()->GetTimerManager().SetTimer(ShootCooldown, this, &ABaseCharacter::SetShoot, CooldownTimer, false);
+	}
 }
 
+void ABaseCharacter::SetShoot()
+{
+	CanShoot = true;
+}

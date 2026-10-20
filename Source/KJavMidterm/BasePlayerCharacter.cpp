@@ -1,8 +1,11 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
+
 #include "BasePlayerCharacter.h"
 #include "Camera/CameraComponent.h"
 #include "GameFramework/SpringArmComponent.h"
+#include "Kismet/GameplayStatics.h"
+
 
 ABasePlayerCharacter::ABasePlayerCharacter()
 {
@@ -36,6 +39,21 @@ void ABasePlayerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInpu
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
 
+}
+
+void ABasePlayerCharacter::GetHurt(int Damage)
+{
+	Super::GetHurt(Damage);
+	if (Health <= 0) 
+	{
+		FString CurrentLevelName = GetWorld()->GetMapName(); //get name of current level, as a string
+		
+		// Remove prefix if running in PIE (Play In Editor)
+		CurrentLevelName.RemoveFromStart(GetWorld()->StreamingLevelsPrefix);
+
+		//opening the level again, to 'reset it'
+		UGameplayStatics::OpenLevel(GetWorld(), FName(*CurrentLevelName)); 
+	}	
 }
 
 void ABasePlayerCharacter::Shoot() 

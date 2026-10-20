@@ -44,8 +44,8 @@ class KJAVMIDTERM_API ACPP_PlayerController : public APlayerController
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category=Input, meta=(AllowPrivateAccess = "true"))
 	class UInputAction* ShootInput; 
 
-
 	protected: 
+
 	virtual void SetupInputComponent() override; 
 
 	virtual void BeginPlay();
