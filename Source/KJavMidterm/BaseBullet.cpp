@@ -69,7 +69,7 @@ void ABaseBullet::OnComponentHit(UPrimitiveComponent* HitComp, AActor* OtherActo
 	if (HitCharacter) 
 	{
 		HitCharacter->GetHurt(BulletDamage);
-	}
+	} 
 
 	this->Destroy(); //destroy after hitting something
 }
